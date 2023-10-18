@@ -78,7 +78,12 @@ def main():
         image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
 
         img = id_borderer(image)
-        img = cv2.resize(img, (1080, 480))
+
+        if img is not None:  # Check if img is valid
+            img = cv2.resize(img, (1080, 480))
+        else:
+            st.error("Error processing image. Please check the uploaded file.")
+
         # Add other image processing steps here...
 
         # Perform OCR on the image
