@@ -96,7 +96,7 @@ def main():
 
 	###############
         alpha = 2 # Contrast control (1.0-3.0)
-        beta = 40 # Brightness control (0-100)
+        beta = 20 # Brightness control (0-100)
 
         img = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
 
