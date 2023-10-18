@@ -8,7 +8,6 @@ os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '../wise-baton-402315-a08c3e5df3f
 
 import streamlit as st
 
-import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
 import cv2
 from google.colab.patches import cv2_imshow
