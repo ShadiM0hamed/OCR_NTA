@@ -1,5 +1,5 @@
-!apt-get update
-!apt-get install tesseract-ocr
-!pip install pytesseract
-!pip install translate
-!pip install --upgrade google-cloud-vision
+tesseract-ocr
+pytesseract
+translate
+google-cloud-vision
+pyairtable
