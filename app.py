@@ -104,53 +104,53 @@ def main():
 
 
 
-	success, FdBack_ID = cv2.imencode('.jpg', Id_mask)
-	success, FdBack_Name = cv2.imencode('.jpg', name_mask)
+        success, FdBack_ID = cv2.imencode('.jpg', Id_mask)
+        success, FdBack_Name = cv2.imencode('.jpg', name_mask)
 
 
 	# Perform OCR on the image
-	image_ID = vision.Image(content=FdBack_ID.tobytes())
-	response_ID = client.text_detection(image=image_ID)
+        image_ID = vision.Image(content=FdBack_ID.tobytes())
+        response_ID = client.text_detection(image=image_ID)
 
 	# Perform OCR on the image
-	image_Name = vision.Image(content=FdBack_Name.tobytes())
-	response_Name = client.text_detection(image=image_Name)
+        image_Name = vision.Image(content=FdBack_Name.tobytes())
+        response_Name = client.text_detection(image=image_Name)
 
 
 
 	# Display the imagea
 
 	# Extract and draw bounding boxes around text
-	for text in response_ID.text_annotations[1:]:
-		vertices = text.bounding_poly.vertices
-		x = [vertex.x for vertex in vertices]
-		y = [vertex.y for vertex in vertices]
-		rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
+        for text in response_ID.text_annotations[1:]:
+                vertices = text.bounding_poly.vertices
+                x = [vertex.x for vertex in vertices]
+                y = [vertex.y for vertex in vertices]
+                rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
 	
 
-	for text in response_Name.text_annotations[1:]:
-		vertices = text.bounding_poly.vertices
-		x = [vertex.x for vertex in vertices]
-		y = [vertex.y for vertex in vertices]
-		rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
+        for text in response_Name.text_annotations[1:]:
+                vertices = text.bounding_poly.vertices
+                x = [vertex.x for vertex in vertices]
+                y = [vertex.y for vertex in vertices]
+                rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
 
 
 
-	m = ''
-	for x in response_ID.text_annotations[0].description.split('\n'):
-		x= remove_non_english_arabic(x)
-		m = m+x
+        m = ''
+        for x in response_ID.text_annotations[0].description.split('\n'):
+                x= remove_non_english_arabic(x)
+                m = m+x
 
-	m = translator.translate(m) # Text to be translated
-	print(m)
+        m = translator.translate(m) # Text to be translated
+        print(m)
 
-	m2 = ''
-	for x in response_Name.text_annotations[0].description.split('\n'):
-		x= remove_non_english_arabic(x)
-		m2 = m2+x
+        m2 = ''
+        for x in response_Name.text_annotations[0].description.split('\n'):
+                x= remove_non_english_arabic(x)
+                m2 = m2+x
 
-	m2 = translator.translate(m) # Text to be translated
-	print(m2)
+        m2 = translator.translate(m) # Text to be translated
+        print(m2)
 
 if __name__ == "__main__":
     main()
