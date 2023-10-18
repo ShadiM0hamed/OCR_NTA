@@ -148,7 +148,7 @@ def main():
         m2 = translator.translate(m) # Text to be translated
         print(m2)
         st.markdown(f"**Translated ID Text:** {m}")
-        st.markdown(f"**Translated Name Text:** {m2}")
+        st.markdown(f"**Translated Name Text:** {response_Name.text_annotations[0].description.split('\n')}")
 
 if __name__ == "__main__":
     main()
