@@ -1,4 +1,4 @@
-tesseract-ocr
+
 pytesseract
 translate
 google-cloud-vision
