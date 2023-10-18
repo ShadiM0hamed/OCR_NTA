@@ -1,0 +1,6 @@
+!add-apt-repository -y ppa:alex-p/tesseract-ocr-devel
+!apt-get update
+!apt-get install tesseract-ocr
+!pip install pytesseract
+!pip install translate
+!pip install --upgrade google-cloud-vision

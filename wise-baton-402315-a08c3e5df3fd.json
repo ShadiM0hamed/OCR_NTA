@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "wise-baton-402315",
+  "private_key_id": "a08c3e5df3fd28a1500aeada5ede6d78964519df",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDIp5J7cbvhgbR4\nyV9GEHYVkOSgMZ2ZJK8UtvWn3P5be/2bchXXmHQtWS6HK/iJK0d9A9twFosjn+l7\nIwKkbD6PsiwJlk03+2zOwbToN/zjge+sYgISq9qGVz4ztT1V9RU/x+EARrWkg4Mh\nH2A7ZrKlEBZ9BHFPWUhw+5OMr39qkjGTu/3BvY/cwAebmVeDHEJKUAl2Pd39VT3U\n23vP965MMzUnFJu1M80MEULO4xbannsS96QrzsOE/xfCs3Pvg58yHvQ6n7GyLzR6\n05I0RAOT//VSV5rv6Yo5k1wXvivU4ch0qXnv99TTkiu+Lg/sfV6k9rFt5cvXEmSM\nBCXJIQ+5AgMBAAECggEAA9PwjzLRAQESspAy5VkIi6pHNkgkB8kjnutLne9xGckw\ngh/ny0RhCQFvygvccq907m1dqRKBBoW1NFBrazwWaHLfdLJdmEEPZxVacGirBiMT\nMbBv9i+5nED7Uoy1Vhe2F1CmmfT/X5tTq9TXpuJza4M2Tp3AVKFxKJigDLnHXj7R\niyZMQHyDuQDUihSnppoQjcVp/xuSLfkSpBTliBgTz7r7WJSIg+JsgW7wE2UMeQ2A\nU8ugOtd/bNcFAPSPbdTKkp9NZFXT73EjJCL9lTkuMQ0rZqQWcEvqqVArxsMJapk8\niSZwAsRb+6Sp3yZQJrHEAKp93de0A5gRI5Q4hJgiIQKBgQD6RNflTix0J/6M+gNm\n68WRDbi3eUk7pjeZbs9zw3L2gAtb8JcMKGwL5EbP3dN3jEMJXtTPw9XWdYcI5FCA\n7eCe9c0u/AOfuHdmbPB1L7sF0ROyTcph5MDPCAo249335bX3eutdzzPV4fhKoORA\nYupLKws7nUmmz5q6MB7B0U3C0QKBgQDNP9+phCYhSDj/ltjmWhJSd4RgXjPLb8ns\ncTLcfQLebxV0qdiBYx/Sy0BWT0agkKc6xHmkcqz0+hU+HzsYmhX+J4/cWqr2VDTl\nShxMbURCxNho79+SIzJdD0XdFwsDH2lr2QmvJ3+BBDRDvn+MrpoMei1ImNmaCg/A\n9HhjPPOoaQKBgH1pTCrrTplyhTuN+XB0y48RqjO+wnTyqT/o6GohUhW2Onr7CCYe\nh246GUYG6fYpQlqKu+fVQe3y/RT2nGTPT1U45XYa8ZHzNVoNUz3WCkky6UTbeIQv\nxnK4m62/6DZWVSZL4XAj6dzPHMYA9ABT0QaT7lAUVJkTxXxxqqgDQ41RAoGAM5y8\nQYRZkkT3EE5+fG5p7RLg1trZa27Q+AP/JjLJZeXJH20WZHLorbkulIWa3QWDB+Qg\nMpojo/a/IL/5vFYC8cZBBshF9Wt3YbEhLJbNc3zMbpbjQXxYTc5pYw9IVaCwgc4y\nATmNdoP4IJDmwhml4z1V5cuJ7JJbI8pV+554JwECgYEAiGYLkcua7lyQIR3BT63C\n/UIo/FkcprAwAk1KelAk98ar56LytY7rg1OqUws8o1Z3G+w7oUdaTsAlkX8hqyYJ\nxDm4o9cviAm1C0ZDCdjKxjmjH3xgDL6QZOTQVShUl/IHyG8zKudwzckg+tq8vU0n\nzKLNIqbGFs+wwOrJmsMZ4kw=\n-----END PRIVATE KEY-----\n",
+  "client_email": "ocr-nta@wise-baton-402315.iam.gserviceaccount.com",
+  "client_id": "110175225266328600546",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/ocr-nta%40wise-baton-402315.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
