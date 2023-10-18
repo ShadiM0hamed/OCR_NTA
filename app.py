@@ -1,6 +1,7 @@
 import os
 from google.cloud import vision
 
+from matplotlib.patches import Rectangle
 
 
 import streamlit as st
