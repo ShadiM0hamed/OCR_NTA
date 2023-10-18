@@ -98,10 +98,8 @@ def main():
         img = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
 
 
-	############
-	
-	Id_mask = img[300:,410:]
-	name_mask = img[10:310,410:]
+        Id_mask = img[300:,410:]
+        name_mask = img[10:310,410:]
 	
 
 
