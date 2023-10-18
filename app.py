@@ -109,6 +109,9 @@ def main():
         image_Name = vision.Image(content=FdBack_Name.tobytes())
         response_Name = client.text_detection(image=image_Name)
 
+        col1, col2 = st.columns(2)
+        col1.image(Id_mask, caption='ID Mask', use_column_width=True)
+        col2.image(name_mask, caption='Name Mask', use_column_width=True)
 
 
 	# Display the imagea
