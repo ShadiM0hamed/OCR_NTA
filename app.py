@@ -137,7 +137,7 @@ def main():
                 x= remove_non_english_arabic(x)
                 m = m+x
 
-        m = translator.translate(m) # Text to be translated
+        #m = translator.translate(m) # Text to be translated
         print(m)
 
         m2 = ''
@@ -145,7 +145,7 @@ def main():
                 x= remove_non_english_arabic(x)
                 m2 = m2+x
 
-        m2 = translator.translate(m) # Text to be translated
+        #m2 = translator.translate(m) # Text to be translated
         print(m2)
         st.markdown(f"**Translated ID Text:** {m}")
         st.markdown("**Translated Name Text:** {}".format(response_Name.text_annotations[0].description.split('\n')))
