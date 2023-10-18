@@ -99,13 +99,11 @@ def main():
 
 
 	############
-
+	
 	Id_mask = img[300:,410:]
 	name_mask = img[10:310,410:]
+	
 
-
-	cv2_imshow(Id_mask)
-	cv2_imshow(name_mask)
 
 
 	success, FdBack_ID = cv2.imencode('.jpg', Id_mask)
