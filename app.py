@@ -40,8 +40,7 @@ def id_borderer(image):
 
     # Select the region using list slicing
     id_mask = image[y1:y2, x1:x2]
-    #cv2_imshow(image)
-    cv2_imshow(id_mask)
+
     return id_mask
 
 def remove_non_english_arabic(text):
