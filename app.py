@@ -92,10 +92,10 @@ def main():
         # Add other Streamlit components for displaying results...
 
 	###############
-	alpha = 1.5 # Contrast control (1.0-3.0)
-	beta = 70 # Brightness control (0-100)
+        alpha = 1.5 # Contrast control (1.0-3.0)
+        beta = 70 # Brightness control (0-100)
 
-	img = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
+        img = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
 
 
 	############
