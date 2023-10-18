@@ -29,19 +29,18 @@ def id_borderer(image):
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
+    x, y, w, h = 0, 0, 0, 0  # Initialize x and y
+
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.8, minNeighbors=5, minSize=(70, 70))
     try:
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
             cv2.rectangle(image, (x, y), (x + int(w*4.5)+40, y + int(h*2.5)+40), (255, 0, 0), 2)
-
+            x1, y1 = x, y  # Top-left corner
+            x2, y2 = x + int(w*4.5)+40, y + int(h*2.5)+40  # Bottom-right corner
     except:
-	    pass
+        pass
 
-    x1, y1 = x,y  # Top-left corner
-    x2, y2 = x + int(w*4.5)+40, y + int(h*2.5)+40  # Bottom-right corner
-
-	
     # Select the region using list slicing
     id_mask = image[y1:y2, x1:x2]
 
