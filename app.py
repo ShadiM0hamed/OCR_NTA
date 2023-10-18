@@ -38,13 +38,14 @@ def id_borderer(image):
             cv2.rectangle(image, (x, y), (x + int(w*4.5)+40, y + int(h*2.5)+40), (255, 0, 0), 2)
             x1, y1 = x, y  # Top-left corner
             x2, y2 = x + int(w*4.5)+40, y + int(h*2.5)+40  # Bottom-right corner
+            id_mask = image[y1:y2, x1:x2]
+
+            return id_mask
     except Exception as e:
         print(f"An error occurred in id_borderer: {e}")
-
+        return image
     # Select the region using list slicing
-    id_mask = image[y1:y2, x1:x2]
 
-    return id_mask
 
 
 def remove_non_english_arabic(text):
