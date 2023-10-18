@@ -13,7 +13,6 @@ import re
 import pytesseract
 from translate import Translator
 import numpy as np
-stop_data = cv2.CascadeClassifier('stop_data.xml')
 
 
 translator= Translator(from_lang="fa", to_lang="en") # Set the target language (in this case, French)
