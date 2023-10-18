@@ -30,7 +30,7 @@ def id_borderer(image):
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(70, 70))
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.8, minNeighbors=5, minSize=(70, 70))
 
     for (x, y, w, h) in faces:
         cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
@@ -85,8 +85,8 @@ def main():
         # Add other Streamlit components for displaying results...
 
 	###############
-        alpha = 1.5 # Contrast control (1.0-3.0)
-        beta = 70 # Brightness control (0-100)
+        alpha = 1.7 # Contrast control (1.0-3.0)
+        beta = 60 # Brightness control (0-100)
 
         img = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
 
