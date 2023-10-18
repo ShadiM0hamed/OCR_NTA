@@ -2,7 +2,7 @@ import os
 from google.cloud import vision
 
 # Set the path to your service account key JSON file
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '../wise-baton-402315-a08c3e5df3fd.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'wise-baton-402315-a08c3e5df3fd.json'
 
 
 
