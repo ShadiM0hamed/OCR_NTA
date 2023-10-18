@@ -75,7 +75,8 @@ def main():
 
     if uploaded_file is not None:
         # Use uploaded_file like an open file in Python.
-        image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), 1)
+        image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
+
         img = id_borderer(image)
         img = cv2.resize(img, (1080, 480))
         # Add other image processing steps here...
