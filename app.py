@@ -35,9 +35,9 @@ def id_borderer(image):
     try:
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            cv2.rectangle(image, (x, y), (x + int(w*4.5)+40, y + int(h*2.5)+40), (255, 0, 0), 2)
+            cv2.rectangle(image, (x, y), (x + int(w*4.5)+80, y + int(h*2.5)+80), (255, 0, 0), 2)
             x1, y1 = x, y  # Top-left corner
-            x2, y2 = x + int(w*4.5)+40, y + int(h*2.5)+40  # Bottom-right corner
+            x2, y2 = x + int(w*4.5)+80, y + int(h*2.5)+80  # Bottom-right corner
             id_mask = image[y1:y2, x1:x2]
 
             return id_mask
