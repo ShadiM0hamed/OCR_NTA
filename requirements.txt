@@ -1,4 +1,7 @@
+matplotlib
+opencv-python-headless
 
+streamlit
 pytesseract
 translate
 google-cloud-vision
