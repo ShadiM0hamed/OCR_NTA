@@ -22,28 +22,30 @@ from google.cloud import vision
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'wise-baton-402315-a08c3e5df3fd.json'
 
 
-
 def id_borderer(image):
     # Load the pre-trained Haar Cascade for face detection
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-    x, y, w, h = 0, 0, 0, 0  # Initialize x and y
+    x1, y1, x2, y2 = 0, 0, 0, 0  # Initialize x1, y1, x2, y2
 
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.8, minNeighbors=5, minSize=(70, 70))
+
     try:
         for (x, y, w, h) in faces:
-            # ...
+            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            cv2.rectangle(image, (x, y), (x + int(w*4.5)+40, y + int(h*2.5)+40), (255, 0, 0), 2)
             x1, y1 = x, y  # Top-left corner
             x2, y2 = x + int(w*4.5)+40, y + int(h*2.5)+40  # Bottom-right corner
-    except:
-        pass
+    except Exception as e:
+        print(f"An error occurred in id_borderer: {e}")
 
     # Select the region using list slicing
     id_mask = image[y1:y2, x1:x2]
 
     return id_mask
+
 
 def remove_non_english_arabic(text):
     # Define the regex pattern for English and Arabic characters
