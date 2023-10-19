@@ -17,7 +17,22 @@ client = vision.ImageAnnotatorClient()
 
 # Set the path to your service account key JSON file
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'wise-baton-402315-a08c3e5df3fd.json'
+def remove_non_english_arabic(text):
+    # Define the regex pattern for English and Arabic characters
 
+    # Join the matches back into a string
+    cleaned_text = ' '
+    cleaned_text = cleaned_text.replace(" ", "")
+    if cleaned_text == '.':
+      cleaned_text = '0'
+    elif cleaned_text == '؛':
+      cleaned_text = '4'
+    elif cleaned_text == '،' or cleaned_text == ',':
+      cleaned_text = '0'
+    elif cleaned_text == ' ':
+      pass
+    cleaned_text = text
+    return cleaned_text
 def id_borderer(image):
     # Load the pre-trained Haar Cascade for face detection
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
