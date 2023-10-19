@@ -3,7 +3,6 @@ from google.cloud import vision
 
 from matplotlib.patches import Rectangle
 
-
 import streamlit as st
 
 import cv2
@@ -12,15 +11,10 @@ import pytesseract
 from translate import Translator
 import numpy as np
 
-
-translator= Translator(from_lang="fa", to_lang="en") # Set the target language (in this case, French)
-
-import os
-from google.cloud import vision
+translator = Translator(from_lang="fa", to_lang="en") # Set the target language (in this case, French)
 
 # Set the path to your service account key JSON file
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'wise-baton-402315-a08c3e5df3fd.json'
-
 
 def id_borderer(image):
     # Load the pre-trained Haar Cascade for face detection
@@ -35,40 +29,17 @@ def id_borderer(image):
     try:
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            cv2.rectangle(image, (x, y), (x + int(w*4.5)+80, y + int(h*2.5)+80), (255, 0, 0), 2)
+            cv2.rectangle(image, (x, y), (x + int(w*4.5)+40, y + int(h*2.5)+40), (255, 0, 0), 2)
             x1, y1 = x, y  # Top-left corner
-            x2, y2 = x + int(w*4.5)+80, y + int(h*2.5)+80  # Bottom-right corner
-            id_mask = image[y1:y2, x1:x2]
-
-            return id_mask
+            x2, y2 = x + int(w*4.5)+40, y + int(h*2.5)+40  # Bottom-right corner
     except Exception as e:
         print(f"An error occurred in id_borderer: {e}")
-        return image
+
     # Select the region using list slicing
+    id_mask = image[y1:y2, x1:x2]
 
+    return id_mask
 
-
-def remove_non_english_arabic(text):
-    # Define the regex pattern for English and Arabic characters
-
-    # Join the matches back into a string
-    cleaned_text = ' '
-    cleaned_text = cleaned_text.replace(" ", "")
-    if cleaned_text == '.':
-      cleaned_text = '0'
-    elif cleaned_text == '؛':
-      cleaned_text = '4'
-    elif cleaned_text == '،' or cleaned_text == ',':
-      cleaned_text = '0'
-    elif cleaned_text == ' ':
-      pass
-    cleaned_text = text
-    return cleaned_text
-
-
-
-# Create a Vision API client
-client = vision.ImageAnnotatorClient()
 def main():
     st.title("Your OCR App")
     
@@ -85,27 +56,15 @@ def main():
         else:
             st.error("Error processing image. Please check the uploaded file.")
 
-        # Add other image processing steps here...
-
-        # Perform OCR on the image
-        # Add your OCR code here...
-
         # Display results in Streamlit
         st.image(img, caption='Uploaded Image.', use_column_width=True)
-        # Add other Streamlit components for displaying results...
 
-	###############
-        alpha = 1.5 # Contrast control (1.0-3.0)
-        beta = 20 # Brightness control (0-100)
-
+        alpha = 1.7  # Contrast control (1.0-3.0)
+        beta = 60  # Brightness control (0-100)
         img = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
 
-
-        Id_mask = img[300:,410:]
-        name_mask = img[10:310,410:]
-	
-
-
+        Id_mask = img[300:, 410:]
+        name_mask = img[10:310, 410:]
 
         success, FdBack_ID = cv2.imencode('.jpg', Id_mask)
         success, FdBack_Name = cv2.imencode('.jpg', name_mask)
@@ -161,7 +120,4 @@ def main():
         st.markdown("**Translated Name Text:** {}".format(response_Name.text_annotations[0].description.split('\n')))
 
 if __name__ == "__main__":
-
-                main()
-
-
+    main()
