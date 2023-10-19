@@ -36,9 +36,9 @@ def remove_non_english_arabic(text):
 
 def process_image(image_path):
     
-
+    image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
     # Load the image
-    image = cv2.imread(image_path)
+    #image = cv2.imread(image_path)
 
     # Extract the bright object using GMM
     # Load the image
