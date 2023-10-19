@@ -1,6 +1,6 @@
 matplotlib
 opencv-python-headless
-
+dlib 
 streamlit
 pytesseract
 translate
