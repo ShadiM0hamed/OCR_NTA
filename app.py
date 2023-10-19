@@ -62,7 +62,7 @@ def id_borderer(image):
     id_mask = image[y1:y2, x1:x2]
     if len(faces) == 0:
         print("No faces were detected.")
-	return image
+        return image
     else:
         
         return id_mask
