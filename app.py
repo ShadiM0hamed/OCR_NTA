@@ -57,7 +57,7 @@ def id_borderer(image):
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
             cv2.rectangle(image, (x, y), (x + int(w*4.5)+100, y + int(h*2.5)+100), (255, 0, 0), 2)
             x1, y1 = x, y  # Top-left corner
-            x2, y2 = x + int(w*4.5)+500, y + int(h*2.5)+60  # Bottom-right corner
+            x2, y2 = x + int(w*4.5)+250, y + int(h*2.5)+60  # Bottom-right corner
 
     # Select the region using list slicing
     id_mask = image[y1:y2, x1:x2]
