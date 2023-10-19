@@ -1,6 +1,5 @@
 matplotlib
 opencv-python-headless
-pyproject.toml-based
 streamlit
 pytesseract
 translate
