@@ -1,15 +1,12 @@
-import os
-from google.cloud import vision
-
-from matplotlib.patches import Rectangle
 
 import streamlit as st
-import dlib
 import cv2
-import re
-import pytesseract
-from translate import Translator
 import numpy as np
+from sklearn.mixture import GaussianMixture
+import os
+from google.cloud import vision
+from matplotlib.patches import Rectangle
+
 
 translator = Translator(from_lang="fa", to_lang="en") # Set the target language (in this case, French)
 # Create a Vision API client
@@ -33,102 +30,98 @@ def remove_non_english_arabic(text):
       pass
     cleaned_text = text
     return cleaned_text
-def id_borderer(image):
-    # Load the pre-trained Haar Cascade for face detection
-    face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    x1, y1, x2, y2 = 0, 0, 0, 0  # Initialize x1, y1, x2, y2
-
-    detector = dlib.get_frontal_face_detector()
-
-    # Convert the image to grayscale (dlib works with grayscale images)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # Detect faces
-    faces = detector(gray)	
-    st.markdown("#############")
-    st.markdown(faces)
 
 
-    for face in faces:
-            x, y, w, h = (face.left(), face.top(), face.width(), face.height())
-            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            cv2.rectangle(image, (x, y), (x + int(w*4.5)+100, y + int(h*2.5)+100), (255, 0, 0), 2)
-            x1, y1 = x, y  # Top-left corner
-            x2, y2 = x + int(w*4.5)+320, y + int(h*2.5)+60  # Bottom-right corner
 
-    # Select the region using list slicing
-    id_mask = image[y1:y2, x1:x2]
-    if len(faces) == 0:
-        print("No faces were detected.")
-        return image
-    else:
-        
-        return id_mask
+
+
+def process_image(image_path):
+    
+
+    # Load the image
+    image = cv2.imread(image_path)
+
+    # Extract the bright object using GMM
+    def extract_bright_object_gmm(image):
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        flattened_hsv = hsv.reshape(-1, 3)
+        gmm = GaussianMixture(n_components=2, covariance_type='full', random_state=0).fit(flattened_hsv)
+        labels = gmm.predict(flattened_hsv).reshape(hsv.shape[:2])
+
+        # Find the largest connected component
+        _, labels, stats, _ = cv2.connectedComponentsWithStats(labels.astype(np.uint8), connectivity=8)
+        largest_component = np.argmax(stats[1:, -1]) + 1
+        mask = (labels == largest_component).astype(np.uint8)
+        return cv2.bitwise_and(image, image, mask=mask)
+
+    # Extract the bright object
+    extracted_object = extract_bright_object_gmm(image)
+
+    # Convert the extracted object to grayscale
+    gray = cv2.cvtColor(extracted_object, cv2.COLOR_BGR2GRAY)
+    contours, _ = cv2.findContours(gray, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    x, y, w, h = cv2.boundingRect(np.vstack(contours))
+    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)
+
+    # Return the result
+    return image[y:y+h,x:x+w]
+
+
+
 
 def main():
-    st.title("Your OCR App")
-    
-    uploaded_file = st.file_uploader("Choose an image...", type="jpg")
-
-    if uploaded_file is not None:
-        # Use uploaded_file like an open file in Python.
-        image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
-
-        img = id_borderer(image)
-
-        if img is not None:  # Check if img is valid
-            img = cv2.resize(img, (1080, 480))
-        else:
-            st.error("Error processing image. Please check the uploaded file.")
-
-        # Display results in Streamlit
-        st.image(img, caption='Uploaded Image.', use_column_width=True)
-
-        alpha = 1.7  # Contrast control (1.0-3.0)
-        beta = 60  # Brightness control (0-100)
-        img = cv2.convertScaleAbs(img, alpha=alpha, beta=beta)
-
-        Id_mask = img[300:, 410:]
-        name_mask = img[10:310, 410:]
-
-        success, FdBack_ID = cv2.imencode('.jpg', Id_mask)
-        success, FdBack_Name = cv2.imencode('.jpg', name_mask)
-
-
-	# Perform OCR on the image
-        image_ID = vision.Image(content=FdBack_ID.tobytes())
-        response_ID = client.text_detection(image=image_ID)
-
-	# Perform OCR on the image
-        image_Name = vision.Image(content=FdBack_Name.tobytes())
-        response_Name = client.text_detection(image=image_Name)
-
-        col1, col2 = st.columns(2)
-        col1.image(Id_mask, caption='ID Mask', use_column_width=True)
-        col2.image(name_mask, caption='Name Mask', use_column_width=True)
-
-
-	# Display the imagea
-
-	# Extract and draw bounding boxes around text
-        for text in response_ID.text_annotations[1:]:
-                vertices = text.bounding_poly.vertices
-                x = [vertex.x for vertex in vertices]
-                y = [vertex.y for vertex in vertices]
-                rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
+	st.title("Your OCR App")
+	    
+	uploaded_file = st.file_uploader("Choose an image...", type="jpg")
 	
-
-        for text in response_Name.text_annotations[1:]:
-                vertices = text.bounding_poly.vertices
-                x = [vertex.x for vertex in vertices]
-                y = [vertex.y for vertex in vertices]
-                rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
-
-
-
+	if uploaded_file is not None:
+	        # Use uploaded_file like an open file in Python.
+	        image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
+	
+	    # Example usage
+	result_image = process_image('Trial3.jpg')
+	
+	
+	# Set the path to your service account key JSON file
+	os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/content/wise-baton-402315-a08c3e5df3fd.json'
+	
+	
+	alpha = 1.5 # Contrast control (1.0-3.0)
+	beta = 60 # Brightness control (0-100)
+	
+	
+	result_image = cv2.convertScaleAbs(result_image, alpha=alpha, beta=beta)
+	
+	
+	
+	
+	client = vision.ImageAnnotatorClient()
+	success, FdBack_ID = cv2.imencode('.jpg', result_image [int(result_image.shape[1]/7): , int(result_image.shape[0]/1.5):])
+	
+	image_ID = vision.Image(content=FdBack_ID.tobytes())
+	response_ID = client.text_detection(image=image_ID)
+	
+	# Extract and draw bounding boxes around text
+	for text in response_ID.text_annotations[1:]:
+	    vertices = text.bounding_poly.vertices
+	    x = [vertex.x for vertex in vertices]
+	    y = [vertex.y for vertex in vertices]
+	    rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
+	
+	
+	m = ''
+	for x in response_ID.text_annotations[0].description.split('\n'):
+	  x= remove_non_english_arabic(x)
+	
+	  m = m+x
+	
+	  print(x)
+	
+	plt.imshow(result_image [int(result_image.shape[1]/9): , int(result_image.shape[0]/1.5):])
+	
+	
+	
         m = ''
         for x in response_ID.text_annotations[0].description.split('\n'):
                 x= remove_non_english_arabic(x)
