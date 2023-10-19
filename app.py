@@ -62,6 +62,7 @@ def main():
     st.title("Streamlit App for Image Processing")
 
     uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+    st.image(uploaded_file)
     if uploaded_file is not None:
         with open('uploaded_image.jpg', 'wb') as f:
             f.write(uploaded_file.getvalue())
