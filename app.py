@@ -55,7 +55,7 @@ def id_borderer(image):
     for face in faces:
             x, y, w, h = (face.left(), face.top(), face.width(), face.height())
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
-            cv2.rectangle(image, (x, y), (x + int(w*4.5)+40, y + int(h*2.5)+40), (255, 0, 0), 2)
+            cv2.rectangle(image, (x, y), (x + int(w*4.5)+100, y + int(h*2.5)+100), (255, 0, 0), 2)
             x1, y1 = x, y  # Top-left corner
             x2, y2 = x + int(w*4.5)+40, y + int(h*2.5)+40  # Bottom-right corner
 
