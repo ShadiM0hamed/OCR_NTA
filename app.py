@@ -53,20 +53,20 @@ def process_image(image_path):
     # Check if the response is successful
     if response.status_code == 200:
 	# Read the output image
-	output_image = Image.open(BytesIO(response.content))
-	output_image = np.array(output_image)
+        output_image = Image.open(BytesIO(response.content))
+        output_image = np.array(output_image)
 
 	# Show the image using cv2_imshow
-	cv2_imshow(output_image)
+        cv2_imshow(output_image)
     else:
-	print(f"Error: {response.content}")
+        print(f"Error: {response.content}")
 
     gray = cv2.cvtColor(output_image, cv2.COLOR_RGBA2GRAY) 
     edged = cv2.Canny(gray, 30, 200) 
 
     # Finding Contours 
     contours, hierarchy = cv2.findContours(edged, 
-      cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
+        cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE) 
 
     # Print the number of contours found
     #print("Number of Contours found = " + str(len(contours))) 
@@ -76,15 +76,15 @@ def process_image(image_path):
 
     # Draw bounding rectangles and extract ROI
     for contour in contours:
-	x, y, w, h = cv2.boundingRect(contour)
-	roi = output_image[y:y+h, x:x+w]  # Extract ROI
-	roi_images.append(roi)
+        x, y, w, h = cv2.boundingRect(contour)
+        roi = output_image[y:y+h, x:x+w]  # Extract ROI
+        roi_images.append(roi)
 
     # Show extracted ROIs
     for i, roi in enumerate(roi_images):
 	#cv2_imshow(roi)
 	#cv2.imwrite(f"/content/roi_f.png", roi)  # Save the ROI
-	break
+        break
     # Return the result
     return roi
 
