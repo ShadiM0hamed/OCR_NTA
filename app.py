@@ -12,6 +12,8 @@ from translate import Translator
 import numpy as np
 
 translator = Translator(from_lang="fa", to_lang="en") # Set the target language (in this case, French)
+# Create a Vision API client
+client = vision.ImageAnnotatorClient()
 
 # Set the path to your service account key JSON file
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'wise-baton-402315-a08c3e5df3fd.json'
