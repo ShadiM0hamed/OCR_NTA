@@ -105,7 +105,6 @@ def process_image(image_path):
 
 
 def main():
-    image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
     st.title("Your OCR App")
     image =np.array([])
     uploaded_file = st.file_uploader("Choose an image...", type="jpg")
