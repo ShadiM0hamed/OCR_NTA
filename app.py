@@ -8,7 +8,6 @@ from google.cloud import vision
 from matplotlib.patches import Rectangle
 
 
-translator = Translator(from_lang="fa", to_lang="en") # Set the target language (in this case, French)
 # Create a Vision API client
 client = vision.ImageAnnotatorClient()
 
