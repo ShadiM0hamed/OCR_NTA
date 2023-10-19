@@ -78,7 +78,7 @@ def main():
 
     except:
         pass
-    if image !='':
+    if image.any():
 	
 	    # Example usage
         result_image = image
