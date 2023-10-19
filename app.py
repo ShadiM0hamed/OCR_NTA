@@ -105,7 +105,7 @@ def main():
 	
 	
 
-	
+	st.image(result_image [int(result_image.shape[1]/9): , int(result_image.shape[0]/1.5):])
 	
 	
 	
@@ -114,6 +114,10 @@ def main():
                 x= remove_non_english_arabic(x)
                 m.append(x)
 
+
+
+
+	    
         #m = translator.translate(m) # Text to be translated
         print(m)
 
