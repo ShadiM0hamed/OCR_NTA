@@ -46,6 +46,7 @@ def id_borderer(image):
     st.markdown(faces)
 
 
+    for (x, y, w, h) in faces:
     try:
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
@@ -57,8 +58,12 @@ def id_borderer(image):
 
     # Select the region using list slicing
     id_mask = image[y1:y2, x1:x2]
-
-    return id_mask
+    if len(faces) == 0:
+        print("No faces were detected.")
+	return image
+    else:
+        
+        return id_mask
 
 def main():
     st.title("Your OCR App")
