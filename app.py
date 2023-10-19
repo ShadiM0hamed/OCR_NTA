@@ -42,7 +42,7 @@ def id_borderer(image):
     x1, y1, x2, y2 = 0, 0, 0, 0  # Initialize x1, y1, x2, y2
 
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.8, minNeighbors=5, minSize=(70, 70))
-    print(face)
+    print(faces)
     try:
         for (x, y, w, h) in faces:
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
