@@ -71,6 +71,7 @@ def process_image(image_path):
 
 def main():
     st.title("Your OCR App")
+    image =''
     try:
         uploaded_file = st.file_uploader("Choose an image...", type="jpg")
         image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
