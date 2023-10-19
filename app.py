@@ -161,8 +161,7 @@ def main():
         st.markdown("**Translated Name Text:** {}".format(response_Name.text_annotations[0].description.split('\n')))
 
 if __name__ == "__main__":
-        try:
+
                 main()
-        except:
-                pass
+
 
