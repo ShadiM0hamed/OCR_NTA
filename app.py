@@ -71,52 +71,49 @@ def process_image(image_path):
 
 
 def main():
-	st.title("Your OCR App")
+        st.title("Your OCR App")
 	    
-	uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+        uploaded_file = st.file_uploader("Choose an image...", type="jpg")
 	
-	if uploaded_file is not None:
+        if uploaded_file is not None:
 	        # Use uploaded_file like an open file in Python.
-	        image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
+                image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
 	
 	    # Example usage
-	result_image = process_image('Trial3.jpg')
+        result_image = process_image('Trial3.jpg')
+	
+
+	
+        alpha = 1.5 # Contrast control (1.0-3.0)
+        beta = 60 # Brightness control (0-100)
 	
 	
-	# Set the path to your service account key JSON file
-	os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = '/content/wise-baton-402315-a08c3e5df3fd.json'
-	
-	
-	alpha = 1.5 # Contrast control (1.0-3.0)
-	beta = 60 # Brightness control (0-100)
-	
-	
-	result_image = cv2.convertScaleAbs(result_image, alpha=alpha, beta=beta)
+        result_image = cv2.convertScaleAbs(result_image, alpha=alpha, beta=beta)
 	
 	
 	
 	
-	client = vision.ImageAnnotatorClient()
-	success, FdBack_ID = cv2.imencode('.jpg', result_image [int(result_image.shape[1]/7): , int(result_image.shape[0]/1.5):])
+        client = vision.ImageAnnotatorClient()
+        success, FdBack_ID = cv2.imencode('.jpg', result_image [int(result_image.shape[1]/7): , int(result_image.shape[0]/1.5):])
 	
-	image_ID = vision.Image(content=FdBack_ID.tobytes())
-	response_ID = client.text_detection(image=image_ID)
+        image_ID = vision.Image(content=FdBack_ID.tobytes())
+        response_ID = client.text_detection(image=image_ID)
 	
 	# Extract and draw bounding boxes around text
-	for text in response_ID.text_annotations[1:]:
-	    vertices = text.bounding_poly.vertices
-	    x = [vertex.x for vertex in vertices]
-	    y = [vertex.y for vertex in vertices]
-	    rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
+        for text in response_ID.text_annotations[1:]:
+                vertices = text.bounding_poly.vertices
+                x = [vertex.x for vertex in vertices]
+                y = [vertex.y for vertex in vertices]
+                rect = Rectangle((x[0], y[0]), x[2] - x[0], y[2] - y[0], linewidth=1, edgecolor='r', facecolor='none')
 	
 	
-	m = ''
-	for x in response_ID.text_annotations[0].description.split('\n'):
-	  x= remove_non_english_arabic(x)
+        m = ''
+        for x in response_ID.text_annotations[0].description.split('\n'):
+                x= remove_non_english_arabic(x)
 	
-	  m = m+x
+                m = m+x
 	
-	  print(x)
+                print(x)
 	
         plt.imshow(result_image [int(result_image.shape[1]/9): , int(result_image.shape[0]/1.5):])
 	
