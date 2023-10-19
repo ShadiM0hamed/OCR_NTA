@@ -6,4 +6,5 @@ translate
 google-cloud-vision
 pyairtable
 dlib-bin
-sklearn
+
+scikit-learn
