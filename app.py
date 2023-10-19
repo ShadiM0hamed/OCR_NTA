@@ -138,6 +138,7 @@ def main():
         m = []
         for x in response_ID.text_annotations[0].description.split('\n'):
                 x= remove_non_english_arabic(x)
+		st.markdown(x)
                 m.append(x)
 
 
