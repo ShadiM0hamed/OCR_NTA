@@ -13,6 +13,17 @@ import matplotlib.pyplot as plt
 # Create a Vision API client
 client = vision.ImageAnnotatorClient()
 
+###
+# Set your API key
+api_key = "ku2unwTtxXA4CcBYaMPibcQM"
+
+# Define the API endpoint
+endpoint = "https://api.remove.bg/v1.0/removebg"
+
+# Prepare the headers
+headers = {
+    "X-Api-Key": api_key,
+}
 # Set the path to your service account key JSON file
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'wise-baton-402315-a08c3e5df3fd.json'
 def remove_non_english_arabic(text):
