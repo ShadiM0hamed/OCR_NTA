@@ -79,7 +79,7 @@ def main():
                 image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
 	
 	    # Example usage
-        result_image = process_image('Trial3.jpg')
+        result_image = image
 	
 
 	
