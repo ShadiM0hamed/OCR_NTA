@@ -97,6 +97,11 @@ def main():
     image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
     st.title("Your OCR App")
     image =np.array([])
+    uploaded_file = st.file_uploader("Choose an image...", type="jpg")
+    image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
+    cv2.write('ii.jpg',image)
+    print('ssssss')
+    st.image(cv2.imread('ii.jpg'))
     try:
         uploaded_file = st.file_uploader("Choose an image...", type="jpg")
         image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
