@@ -6,7 +6,7 @@ from sklearn.mixture import GaussianMixture
 import os
 from google.cloud import vision
 from matplotlib.patches import Rectangle
-
+import matplotlib as plt
 
 # Create a Vision API client
 client = vision.ImageAnnotatorClient()
