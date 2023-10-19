@@ -105,7 +105,7 @@ def main():
 	
 	
 
-	st.image(result_image [int(result_image.shape[1]/9): , int(result_image.shape[0]/1.5):])
+        st.image(result_image [int(result_image.shape[1]/9): , int(result_image.shape[0]/1.5):])
 	
 	
 	
