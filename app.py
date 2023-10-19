@@ -97,12 +97,12 @@ def process_image(image_path):
 
 def main():
     st.title("Streamlit App for Image Processing")
+        # Read the uploaded image with OpenCV
+        uploaded_image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
 
-    uploaded_file = st.file_uploader("Choose an image...", type="jpg")
-    uploaded_file = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
-    
-    cv2.imwrite('uploaded_image.jpg',uploaded_file)
-    if uploaded_file is not None:
+        # Save the uploaded image using OpenCV
+        cv2.imwrite('uploaded_image.jpg', uploaded_image)
+
         with open('uploaded_image.jpg', 'wb') as f:
             f.write(uploaded_file.getvalue())
         result_image = process_image('uploaded_image.jpg')
