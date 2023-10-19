@@ -112,7 +112,7 @@ def main():
         m = []
         for x in response_ID.text_annotations[0].description.split('\n'):
                 x= remove_non_english_arabic(x)
-                m = m.append(x)
+                m.append(x)
 
         #m = translator.translate(m) # Text to be translated
         print(m)
