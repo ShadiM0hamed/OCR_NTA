@@ -73,10 +73,8 @@ def main():
         st.title("Your OCR App")
 	    
         uploaded_file = st.file_uploader("Choose an image...", type="jpg")
-	
-        if uploaded_file is not None:
-	        # Use uploaded_file like an open file in Python.
-                image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
+
+        image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
 	
 	    # Example usage
         result_image = image
