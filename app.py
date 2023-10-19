@@ -63,6 +63,7 @@ def main():
 
     uploaded_file = st.file_uploader("Choose an image...", type="jpg")
     st.image(uploaded_file)
+    cv2.imwrite('uploaded_image.jpg')
     if uploaded_file is not None:
         with open('uploaded_image.jpg', 'wb') as f:
             f.write(uploaded_file.getvalue())
