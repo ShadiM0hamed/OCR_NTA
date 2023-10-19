@@ -74,7 +74,7 @@ def main():
 	    
     uploaded_file = st.file_uploader("Choose an image...", type="jpg")
     image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
-    if image:
+    if image is not None:
 	
 	    # Example usage
         result_image = image
