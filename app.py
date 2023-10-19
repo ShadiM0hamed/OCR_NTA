@@ -99,7 +99,7 @@ def main():
     st.title("Streamlit App for Image Processing")
 
     uploaded_file = st.file_uploader("Choose an image...", type="jpg")
-    image = cv2.imdecode(np.fromstring(image_file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
+    uploaded_file = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
     
     cv2.imwrite('uploaded_image.jpg',uploaded_file)
     if uploaded_file is not None:
