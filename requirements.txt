@@ -6,3 +6,4 @@ pytesseract
 translate
 google-cloud-vision
 pyairtable
+dlib-bin
