@@ -1,6 +1,6 @@
 matplotlib
 opencv-python-headless
-dldlib-19.22.99-cp38-cp38-win_amd64.whlib 
+pyproject.toml-based
 streamlit
 pytesseract
 translate
