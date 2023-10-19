@@ -52,7 +52,7 @@ def id_borderer(image):
     st.markdown(faces)
 
 
-    for (x, y, w, h) in faces:
+    for (x, y, w, h) in faces[0]:
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
             cv2.rectangle(image, (x, y), (x + int(w*4.5)+40, y + int(h*2.5)+40), (255, 0, 0), 2)
             x1, y1 = x, y  # Top-left corner
