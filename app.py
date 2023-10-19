@@ -1,11 +1,13 @@
-
-import streamlit as st
 import cv2
 import numpy as np
 from sklearn.mixture import GaussianMixture
-import os
 from google.cloud import vision
 from matplotlib.patches import Rectangle
+import requests
+from PIL import Image
+from io import BytesIO
+import streamlit as st
+import os
 import matplotlib.pyplot as plt
 
 # Create a Vision API client
@@ -34,15 +36,15 @@ def remove_non_english_arabic(text):
 
 
 
-def process_image(image_path):
+def process_image(image):
     
-    image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
+
     # Load the image
     #image = cv2.imread(image_path)
 
     # Extract the bright object using GMM
     # Load the image
-    image = cv2.imread(image_path)
+    #image = cv2.imread(image_path)
 
         # Set your API key
     files = {  "image_file": open(image_path, "rb"),}
@@ -92,12 +94,15 @@ def process_image(image_path):
 
 
 def main():
+    image = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
     st.title("Your OCR App")
     image =np.array([])
     try:
         uploaded_file = st.file_uploader("Choose an image...", type="jpg")
         image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
-
+	cv2.write('ii.jpg',image)
+	print('ssssss')
+	st.image(cv2.imread('ii.jpg'))
     except:
         pass
     if image.any():
