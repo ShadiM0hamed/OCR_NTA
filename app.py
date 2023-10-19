@@ -71,14 +71,14 @@ def process_image(image_path):
 
 def main():
     st.title("Your OCR App")
-    image is None
+    image =''
     try:
         uploaded_file = st.file_uploader("Choose an image...", type="jpg")
         image = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), 1)
 
     except:
         pass
-    if image is not None:
+    if image !='':
 	
 	    # Example usage
         result_image = image
