@@ -70,7 +70,7 @@ def main():
         alpha = 2.5
         beta = 1
         result_image = cv2.convertScaleAbs(result_image, alpha=alpha, beta=beta)
-
+        st.image(result_image)
         client = vision.ImageAnnotatorClient()
         success, FdBack_ID = cv2.imencode('.jpg', result_image[int(result_image.shape[1]/7):,int(result_image.shape[0]/1.5):])
 
