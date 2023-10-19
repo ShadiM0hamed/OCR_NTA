@@ -72,8 +72,7 @@ def main():
         result_image = cv2.convertScaleAbs(result_image, alpha=alpha, beta=beta)
 
         client = vision.ImageAnnotatorClient()
-        success, FdBack_ID = cv2.imencode('.jpg', result_image[int(result_image.shape[1]/7):,
-                                                                int(result_image.shape[0]/1.5):])
+        success, FdBack_ID = cv2.imencode('.jpg', result_image[int(result_image.shape[1]/7):,int(result_image.shape[0]/1.5):])
 
         image_ID = vision.Image(content=FdBack_ID.tobytes())
         response_ID = client.text_detection(image=image_ID)
