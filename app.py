@@ -4,7 +4,7 @@ from google.cloud import vision
 from matplotlib.patches import Rectangle
 
 import streamlit as st
-
+import dlib
 import cv2
 import re
 import pytesseract
@@ -41,7 +41,13 @@ def id_borderer(image):
 
     x1, y1, x2, y2 = 0, 0, 0, 0  # Initialize x1, y1, x2, y2
 
-    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.4, minNeighbors=5, minSize=(70, 70))
+    detector = dlib.get_frontal_face_detector()
+
+    # Convert the image to grayscale (dlib works with grayscale images)
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+    # Detect faces
+    faces = detector(gray)	
     st.markdown("#############")
     st.markdown(faces)
 
