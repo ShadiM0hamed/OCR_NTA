@@ -96,7 +96,7 @@ def process_image(image_path):
 
 
 def main():
-    st.title("Streamlit App for Image Processing")
+        st.title("Streamlit App for Image Processing")
         # Read the uploaded image with OpenCV
         uploaded_image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_UNCHANGED)
 
