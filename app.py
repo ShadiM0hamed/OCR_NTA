@@ -6,7 +6,7 @@ from sklearn.mixture import GaussianMixture
 import os
 from google.cloud import vision
 from matplotlib.patches import Rectangle
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 # Create a Vision API client
 client = vision.ImageAnnotatorClient()
@@ -112,7 +112,6 @@ def main():
 	
                 print(x)
 	
-        plt.imshow(result_image [int(result_image.shape[1]/9): , int(result_image.shape[0]/1.5):])
 	
 	
 	
